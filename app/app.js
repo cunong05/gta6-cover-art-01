@@ -4,7 +4,6 @@
 
 const $ = (id) => document.getElementById(id);
 const preview = $('preview');
-const pctx = preview.getContext('2d');
 
 /* ---------------------------------------------------------------- state */
 
@@ -136,14 +135,18 @@ const GRADES = {
   },
 };
 
-function drawPhotoInPanel(ctx, img, poly, panel) {
-  const box = polygonBounds(poly);
-  ctx.save();
+function clipPolygon(ctx, poly) {
   ctx.beginPath();
   ctx.moveTo(poly[0][0], poly[0][1]);
   for (let i = 1; i < poly.length; i++) ctx.lineTo(poly[i][0], poly[i][1]);
   ctx.closePath();
   ctx.clip();
+}
+
+function drawPhotoInPanel(ctx, img, poly, panel) {
+  const box = polygonBounds(poly);
+  ctx.save();
+  clipPolygon(ctx, poly);
   // Cover-fit the panel box, then zoom and pan.
   const scale = Math.max(box.w / img.naturalWidth, box.h / img.naturalHeight) * panel.zoom;
   const dw = img.naturalWidth * scale;
@@ -163,11 +166,7 @@ function drawPhotoInPanel(ctx, img, poly, panel) {
 function drawPanelPlaceholder(ctx, poly, index) {
   const box = polygonBounds(poly);
   ctx.save();
-  ctx.beginPath();
-  ctx.moveTo(poly[0][0], poly[0][1]);
-  for (let i = 1; i < poly.length; i++) ctx.lineTo(poly[i][0], poly[i][1]);
-  ctx.closePath();
-  ctx.clip();
+  clipPolygon(ctx, poly);
   const grad = ctx.createLinearGradient(box.x, box.y, box.x + box.w, box.y + box.h);
   grad.addColorStop(0, '#3a2b5c');
   grad.addColorStop(1, '#1a1030');
