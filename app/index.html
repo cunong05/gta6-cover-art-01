@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Cover Studio — GTA-style cover art maker</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <h1>Vice Cover Studio</h1>
+  <span class="tag">Turn any photo into GTA-style cover art — offline, no upload.</span>
+  <span class="spacer"></span>
+  <span class="badge">100% offline</span>
+</header>
+<main>
+  <aside class="controls">
+    <section class="control" id="photos-section">
+      <h2>1 · Photos</h2>
+      <label class="field"><span>Add 1–4 photos (from your machine)</span>
+        <input type="file" id="photoInput" accept="image/*" multiple>
+      </label>
+      <div class="row">
+        <button type="button" id="sampleSunset" class="small">Load sample: Sunset</button>
+        <button type="button" id="sampleNeon" class="small">Load sample: Neon</button>
+      </div>
+      <div class="thumbs" id="thumbs"></div>
+      <p class="hint">Photos never leave your machine. Samples are original art drawn in code.</p>
+    </section>
+
+    <section class="control" id="layout-section">
+      <h2>2 · Layout</h2>
+      <div class="row" id="layoutButtons">
+        <button type="button" data-layout="full" class="small">Full-bleed</button>
+        <button type="button" data-layout="split" class="small">Diagonal split</button>
+        <button type="button" data-layout="hero3" class="small active">Hero + 2</button>
+        <button type="button" data-layout="grid4" class="small">Grid 4</button>
+      </div>
+      <p class="hint">Click a panel on the canvas to select it, then drag to move the photo.</p>
+      <label class="field"><span>Selected panel photo</span>
+        <select id="panelPhoto"></select>
+      </label>
+      <label class="field"><span>Zoom <output id="zoomOut">100%</output></span>
+        <input type="range" id="zoom" min="50" max="300" value="100">
+      </label>
+      <div class="row">
+        <button type="button" id="flipBtn" class="small">Flip photo</button>
+        <button type="button" id="fillAllBtn" class="small">Fill all panels with photo 1</button>
+      </div>
+    </section>
+
+    <section class="control" id="caption-section">
+      <h2>3 · Caption</h2>
+      <label class="field"><span>Title</span>
+        <input type="text" id="titleInput" value="VICE CITY" maxlength="24">
+      </label>
+      <label class="field"><span>Subtitle</span>
+        <input type="text" id="subtitleInput" value="Neon nights, palm dreams" maxlength="48">
+      </label>
+      <label class="field"><span>Title style</span>
+        <select id="titleStyle">
+          <option value="sunset">Sunset — orange gradient, pink outline</option>
+          <option value="neon">Neon — cyan glow on magenta</option>
+          <option value="gold">Gold — gold on deep teal</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="control" id="grade-section">
+      <h2>4 · Colour grade</h2>
+      <div class="row" id="gradeButtons">
+        <button type="button" data-grade="sunset" class="small active">Vice Sunset</button>
+        <button type="button" data-grade="neon" class="small">Neon Night</button>
+        <button type="button" data-grade="gold" class="small">Palm Gold</button>
+      </div>
+      <label class="field"><span>Grain + halftone</span>
+        <select id="textureSelect">
+          <option value="both">Grain + halftone dots</option>
+          <option value="grain">Grain only</option>
+          <option value="none">Clean (no texture)</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="control" id="export-section">
+      <h2>5 · Export PNG</h2>
+      <label class="field"><span>Size</span>
+        <select id="sizeSelect">
+          <option value="1080x1350">Portrait 1080 × 1350 (feed)</option>
+          <option value="1080x1080">Square 1080 × 1080</option>
+          <option value="1920x1080">Landscape 1920 × 1080</option>
+        </select>
+      </label>
+      <button type="button" id="exportBtn" class="primary">Export PNG</button>
+      <p class="hint">One click, one PNG download. Try all three sizes.</p>
+    </section>
+  </aside>
+
+  <section class="stage">
+    <div class="canvas-wrap">
+      <canvas id="preview" width="540" height="675"></canvas>
+    </div>
+    <p class="hint" id="stageHint">Drag a photo inside its panel to reposition it. Use the zoom slider to crop tighter.</p>
+    <div class="export-bar">
+      <button type="button" id="exportSquare" class="small">Export 1080 × 1080</button>
+      <button type="button" id="exportPortrait" class="small">Export 1080 × 1350</button>
+      <button type="button" id="exportWide" class="small">Export 1920 × 1080</button>
+    </div>
+  </section>
+</main>
+<footer>Original art only — no Rockstar Games logo, artwork or fonts. Built with plain HTML, CSS and canvas JavaScript.</footer>
+<script src="app.js"></script>
+</body>
+</html>

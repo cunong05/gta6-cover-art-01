@@ -1,0 +1,93 @@
+/* Vice Cover Studio — dark editor UI, system fonts only, no network. */
+* { box-sizing: border-box; }
+:root {
+  --bg: #0d0a14;
+  --panel: #171226;
+  --panel-2: #1e1830;
+  --line: #332a4d;
+  --text: #f4eefc;
+  --muted: #b9aecf;
+  --accent: #ff5e8a;
+  --accent-2: #ffb347;
+  --accent-3: #22d3ee;
+  --radius: 12px;
+}
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+body {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px; line-height: 1.45;
+  min-height: 100vh; display: flex; flex-direction: column;
+}
+header.topbar {
+  display: flex; align-items: center; gap: 14px;
+  padding: 10px 18px; background: linear-gradient(90deg, #2b1150, #7a1042 55%, #ff7a18);
+  border-bottom: 2px solid #000;
+}
+header.topbar h1 {
+  margin: 0; font-family: "Arial Black", Impact, sans-serif;
+  font-size: 24px; letter-spacing: 2px; text-transform: uppercase;
+  color: #fff; text-shadow: 2px 2px 0 #000, 0 0 18px rgba(255, 94, 138, .8);
+}
+header.topbar .tag { color: #ffe9f2; font-size: 13px; opacity: .92; }
+header.topbar .spacer { flex: 1; }
+.badge {
+  background: #000; color: var(--accent-2); border: 1px solid var(--accent-2);
+  border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700;
+}
+main { display: flex; gap: 16px; padding: 16px; flex: 1; align-items: flex-start; }
+aside.controls {
+  width: 300px; flex: 0 0 300px; background: var(--panel);
+  border: 1px solid var(--line); border-radius: var(--radius); padding: 14px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+section.control h2 {
+  margin: 0 0 8px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--accent-2);
+}
+section.control p.hint { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
+label.field { display: block; margin-bottom: 8px; font-size: 13px; color: var(--muted); }
+label.field span { display: block; margin-bottom: 3px; color: var(--text); font-weight: 600; }
+input[type="text"], select {
+  width: 100%; padding: 8px 10px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--panel-2); color: var(--text);
+  font-size: 14px;
+}
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+input[type="file"] { width: 100%; color: var(--muted); }
+.row { display: flex; gap: 8px; flex-wrap: wrap; }
+.row > * { flex: 1; }
+button {
+  cursor: pointer; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--panel-2); color: var(--text); padding: 8px 12px;
+  font-size: 13px; font-weight: 600;
+}
+button:hover { border-color: var(--accent); }
+button.primary {
+  background: linear-gradient(90deg, var(--accent), #ff7a18);
+  border-color: #000; color: #fff; text-shadow: 0 1px 0 rgba(0,0,0,.4);
+}
+button.active { background: var(--accent); border-color: #fff; color: #fff; }
+button.small { padding: 5px 9px; font-size: 12px; }
+.thumbs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.thumbs img {
+  width: 64px; height: 48px; object-fit: cover; border-radius: 6px;
+  border: 2px solid transparent; cursor: pointer;
+}
+.thumbs img.selected { border-color: var(--accent-2); }
+section.stage { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.canvas-wrap {
+  background: #000; border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 10px; box-shadow: 0 10px 40px rgba(0,0,0,.6);
+}
+#preview { display: block; max-width: 100%; height: auto; cursor: grab; touch-action: none; }
+#preview.dragging { cursor: grabbing; }
+.stage .hint { color: var(--muted); font-size: 12px; text-align: center; max-width: 560px; }
+.export-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+footer {
+  padding: 10px 18px; color: var(--muted); font-size: 12px;
+  border-top: 1px solid var(--line); text-align: center;
+}
+@media (max-width: 900px) {
+  main { flex-direction: column; }
+  aside.controls { width: 100%; flex-basis: auto; }
+}
